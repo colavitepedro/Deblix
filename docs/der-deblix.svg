@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama entidade-relacionamento do Deblix</title>
+  <desc id="desc">Modelo relacional das tabelas users, topicos e respostas.</desc>
+  <defs>
+    <style>
+      .canvas { fill: #ffffff; }
+      .table { fill: #ffffff; stroke: #4b5563; stroke-width: 1.5; }
+      .header { fill: #d1d5db; stroke: #4b5563; stroke-width: 1.5; }
+      .headerText { fill: #111827; font: 700 15px Arial, sans-serif; }
+      .cell { fill: #111827; font: 12px Arial, sans-serif; }
+      .key { fill: #111827; font: 700 11px Arial, sans-serif; }
+      .line { stroke: #9ca3af; stroke-width: 1; }
+      .relation { fill: none; stroke: #111827; stroke-width: 1.8; marker-end: url(#arrow); }
+      .cardinality { fill: #111827; font: 700 11px Arial, sans-serif; }
+      .diagramTitle { fill: #111827; font: 700 19px Arial, sans-serif; }
+      .legend { fill: #4b5563; font: 700 12px Arial, sans-serif; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#111827"/>
+    </marker>
+  </defs>
+
+  <rect class="canvas" width="1400" height="850"/>
+  <text class="diagramTitle" x="50" y="40">DEBLIX - DIAGRAMA ENTIDADE-RELACIONAMENTO</text>
+
+  <g id="users" transform="translate(480 80)">
+    <rect class="table" width="440" height="246"/>
+    <rect class="header" width="440" height="30"/>
+    <text class="headerText" x="12" y="20">users</text>
+    <line class="line" x1="60" y1="30" x2="60" y2="246"/>
+    <line class="line" x1="275" y1="30" x2="275" y2="246"/>
+    <path class="line" d="M0 54H440M0 78H440M0 102H440M0 126H440M0 150H440M0 174H440M0 198H440M0 222H440"/>
+    <text class="key" x="12" y="47">PK</text><text class="cell" x="72" y="47">id</text><text class="cell" x="287" y="47">BIGINT</text>
+    <text class="cell" x="72" y="71">name</text><text class="cell" x="287" y="71">VARCHAR</text>
+    <text class="key" x="12" y="95">UQ</text><text class="cell" x="72" y="95">email</text><text class="cell" x="287" y="95">VARCHAR</text>
+    <text class="cell" x="72" y="119">foto_perfil</text><text class="cell" x="287" y="119">VARCHAR NULL</text>
+    <text class="cell" x="72" y="143">is_admin</text><text class="cell" x="287" y="143">BOOLEAN</text>
+    <text class="cell" x="72" y="167">email_verified_at</text><text class="cell" x="287" y="167">TIMESTAMP NULL</text>
+    <text class="cell" x="72" y="191">password</text><text class="cell" x="287" y="191">VARCHAR</text>
+    <text class="cell" x="72" y="215">remember_token</text><text class="cell" x="287" y="215">VARCHAR NULL</text>
+    <text class="cell" x="72" y="239">created_at / updated_at</text><text class="cell" x="287" y="239">TIMESTAMP</text>
+  </g>
+
+  <g id="topicos" transform="translate(80 475)">
+    <rect class="table" width="500" height="294"/>
+    <rect class="header" width="500" height="30"/>
+    <text class="headerText" x="12" y="20">topicos</text>
+    <line class="line" x1="60" y1="30" x2="60" y2="294"/>
+    <line class="line" x1="300" y1="30" x2="300" y2="294"/>
+    <path class="line" d="M0 54H500M0 78H500M0 102H500M0 126H500M0 150H500M0 174H500M0 198H500M0 222H500M0 246H500M0 270H500"/>
+    <text class="key" x="12" y="47">PK</text><text class="cell" x="72" y="47">id</text><text class="cell" x="312" y="47">INT</text>
+    <text class="key" x="12" y="71">FK</text><text class="cell" x="72" y="71">user_id</text><text class="cell" x="312" y="71">BIGINT NULL</text>
+    <text class="cell" x="72" y="95">titulo</text><text class="cell" x="312" y="95">VARCHAR</text>
+    <text class="cell" x="72" y="119">categoria</text><text class="cell" x="312" y="119">VARCHAR</text>
+    <text class="cell" x="72" y="143">autor</text><text class="cell" x="312" y="143">VARCHAR</text>
+    <text class="cell" x="72" y="167">descricao</text><text class="cell" x="312" y="167">TEXT</text>
+    <text class="cell" x="72" y="191">data_criacao</text><text class="cell" x="312" y="191">DATE</text>
+    <text class="cell" x="72" y="215">imagem</text><text class="cell" x="312" y="215">VARCHAR NULL</text>
+    <text class="cell" x="72" y="239">created_at</text><text class="cell" x="312" y="239">TIMESTAMP</text>
+    <text class="cell" x="72" y="263">updated_at</text><text class="cell" x="312" y="263">TIMESTAMP</text>
+  </g>
+
+  <g id="respostas" transform="translate(820 500)">
+    <rect class="table" width="500" height="246"/>
+    <rect class="header" width="500" height="30"/>
+    <text class="headerText" x="12" y="20">respostas</text>
+    <line class="line" x1="60" y1="30" x2="60" y2="246"/>
+    <line class="line" x1="300" y1="30" x2="300" y2="246"/>
+    <path class="line" d="M0 54H500M0 78H500M0 102H500M0 126H500M0 150H500M0 174H500M0 198H500M0 222H500"/>
+    <text class="key" x="12" y="47">PK</text><text class="cell" x="72" y="47">id</text><text class="cell" x="312" y="47">INT</text>
+    <text class="key" x="12" y="71">FK</text><text class="cell" x="72" y="71">user_id</text><text class="cell" x="312" y="71">BIGINT NULL</text>
+    <text class="key" x="12" y="95">FK</text><text class="cell" x="72" y="95">topico_id</text><text class="cell" x="312" y="95">INT</text>
+    <text class="cell" x="72" y="119">usuario</text><text class="cell" x="312" y="119">VARCHAR</text>
+    <text class="cell" x="72" y="143">mensagem</text><text class="cell" x="312" y="143">TEXT</text>
+    <text class="cell" x="72" y="167">data_resposta</text><text class="cell" x="312" y="167">DATE</text>
+    <text class="cell" x="72" y="191">created_at</text><text class="cell" x="312" y="191">TIMESTAMP</text>
+    <text class="cell" x="72" y="215">updated_at</text><text class="cell" x="312" y="215">TIMESTAMP</text>
+  </g>
+
+  <path class="relation" d="M560 326V410H330V475"/>
+  <text class="cardinality" x="548" y="348">1</text><text class="cardinality" x="340" y="465">N</text>
+
+  <path class="relation" d="M840 326V410H1070V500"/>
+  <text class="cardinality" x="850" y="348">1</text><text class="cardinality" x="1080" y="490">N</text>
+
+  <path class="relation" d="M580 620H820"/>
+  <text class="cardinality" x="595" y="611">1</text><text class="cardinality" x="800" y="611">N</text>
+
+  <text class="legend" x="50" y="815">LEGENDA: PK = chave primária · FK = chave estrangeira · UQ = restrição única · 1:N = um para muitos</text>
+</svg>
