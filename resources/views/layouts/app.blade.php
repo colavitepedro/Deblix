@@ -11,6 +11,23 @@
     @endphp
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script>
+        (() => {
+            let theme = null;
+            try {
+                theme = localStorage.getItem('deblix-theme');
+            } catch (error) {
+                // O tema continua funcional mesmo quando o armazenamento está bloqueado.
+            }
+
+            if (theme !== 'light' && theme !== 'dark') {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            document.documentElement.dataset.theme = theme;
+            document.documentElement.dataset.bsTheme = theme;
+        })();
+    </script>
     <link rel="stylesheet" href="{{ asset('css/deblix.css') }}?v={{ $styleVersion }}">
 </head>
 <body>
@@ -60,6 +77,11 @@
                 </ul>
 
                 <div class="nav-actions">
+                    <button class="btn btn-ghost theme-toggle" type="button" id="themeToggle"
+                            aria-label="Alternar para tema escuro" aria-pressed="false">
+                        <i class="bi bi-moon-stars" aria-hidden="true"></i>
+                        <span>Tema escuro</span>
+                    </button>
                     @guest
                         <a class="btn btn-ghost" href="{{ route('login') }}">Entrar</a>
                         <a class="btn btn-primary-deblix" href="{{ route('register') }}">Cadastrar</a>
@@ -115,6 +137,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/theme.js') }}?v=1" defer></script>
 @stack('scripts')
 </body>
 </html>
