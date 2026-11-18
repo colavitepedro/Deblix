@@ -1508,3 +1508,17 @@ html[data-theme="dark"] .alert-danger {
     outline: 3px solid var(--accent);
     outline-offset: 2px;
 }
+
+
+html[data-theme="dark"] .btn-primary-deblix,
+html[data-theme="dark"] .btn-primary-deblix:hover,
+html[data-theme="dark"] .btn-primary-deblix:focus,
+html[data-theme="dark"] .brand-symbol,
+html[data-theme="dark"] .user-chip-avatar,
+html[data-theme="dark"] .mini-avatar,
+html[data-theme="dark"] .response-avatar,
+html[data-theme="dark"] .profile-avatar,
+html[data-theme="dark"] .category-link:hover,
+html[data-theme="dark"] .category-link.active {
+    color: #0f172a;
+}
