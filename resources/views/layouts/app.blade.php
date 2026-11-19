@@ -39,11 +39,20 @@
                 <span>Deblix</span>
             </a>
 
-            <button class="navbar-toggler order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu">
+            <div class="theme-switch me-2" role="group" aria-label="Tema da página">
+                <button class="theme-option" type="button" data-theme-choice="light" aria-label="Tema claro" aria-pressed="false" title="Tema claro">
+                    <i class="bi bi-sun" aria-hidden="true"></i>
+                </button>
+                <button class="theme-option" type="button" data-theme-choice="dark" aria-label="Tema escuro" aria-pressed="false" title="Tema escuro">
+                    <i class="bi bi-moon-stars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse order-4 order-lg-2" id="mainNav">
+            <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('topicos.index') }}">
@@ -100,14 +109,6 @@
                         </form>
                     @endguest
                 </div>
-            </div>
-            <div class="theme-switch order-2 order-lg-3 ms-auto me-2" role="group" aria-label="Tema da página">
-                <button class="theme-option" type="button" data-theme-choice="light" aria-label="Tema claro" aria-pressed="false" title="Tema claro">
-                    <i class="bi bi-sun" aria-hidden="true"></i>
-                </button>
-                <button class="theme-option" type="button" data-theme-choice="dark" aria-label="Tema escuro" aria-pressed="false" title="Tema escuro">
-                    <i class="bi bi-moon-stars" aria-hidden="true"></i>
-                </button>
             </div>
         </div>
     </nav>

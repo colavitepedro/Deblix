@@ -1534,8 +1534,8 @@ html[data-theme="dark"] .alert-danger {
 
 .theme-option[aria-pressed="true"] {
     color: var(--accent);
-    background: var(--panel);
-    border-color: var(--border-soft);
+    background: var(--accent-soft);
+    border-color: var(--accent);
 }
 
 .theme-option:focus-visible {
