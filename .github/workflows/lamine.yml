@@ -68,25 +68,45 @@ jobs:
           host: ${{ env.EC2_HOST }}
           username: ${{ env.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          command_timeout: 20m
           envs: DEPLOY_PATH,EC2_USER
           script: |
             set -euo pipefail
             export DEBIAN_FRONTEND=noninteractive
 
-            sudo dpkg --configure -a
-            sudo apt-get -f install -y
-            sudo apt-get update
-            sudo apt-get install -y --no-install-recommends \
-              apache2 mysql-server composer unzip zip git curl rsync \
-              php php-cli php-common libapache2-mod-php \
+            required_packages=(
+              apache2 mysql-server composer unzip zip git curl rsync
+              php php-cli php-common libapache2-mod-php
               php-mysql php-xml php-curl php-zip php-bcmath php-mbstring php-gd php-intl
+            )
+            missing_packages=()
 
+            echo "[prepare] checking server packages." >&2
+            for package in "${required_packages[@]}"; do
+              package_status="$(dpkg-query -W -f='${db:Status-Status}' "$package" 2>/dev/null || true)"
+              if [ "$package_status" != "installed" ]; then
+                missing_packages+=("$package")
+              fi
+            done
+
+            if [ "${#missing_packages[@]}" -gt 0 ]; then
+              echo "[prepare] installing missing packages: ${missing_packages[*]}" >&2
+              sudo dpkg --configure -a
+              sudo apt-get -f install -y
+              sudo apt-get update
+              sudo apt-get install -y --no-install-recommends "${missing_packages[@]}"
+            else
+              echo "[prepare] required packages are already installed; skipping APT." >&2
+            fi
+
+            echo "[prepare] enabling Apache and MySQL." >&2
             sudo systemctl enable apache2
             sudo systemctl start apache2
             sudo systemctl enable mysql
             sudo systemctl start mysql
             sudo a2enmod rewrite
 
+            echo "[prepare] creating Laravel directories." >&2
             sudo mkdir -p \
               "$DEPLOY_PATH" \
               "$DEPLOY_PATH/storage/app/public" \
@@ -97,6 +117,7 @@ jobs:
 
             sudo chown -R "$EC2_USER":www-data "$DEPLOY_PATH"
             sudo chmod -R ug+rwx "$DEPLOY_PATH"
+            echo "[prepare] server preparation complete." >&2
 
       - name: Sync project files to EC2
         uses: easingthemes/ssh-deploy@v6.0.1
