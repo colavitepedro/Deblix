@@ -39,6 +39,15 @@
                 <span>Deblix</span>
             </a>
 
+            <div class="theme-switch me-2" role="group" aria-label="Tema da página">
+                <button class="theme-option" type="button" data-theme-choice="light" aria-label="Tema claro" aria-pressed="false" title="Tema claro">
+                    <i class="bi bi-sun" aria-hidden="true"></i>
+                </button>
+                <button class="theme-option" type="button" data-theme-choice="dark" aria-label="Tema escuro" aria-pressed="false" title="Tema escuro">
+                    <i class="bi bi-moon-stars" aria-hidden="true"></i>
+                </button>
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -77,11 +86,6 @@
                 </ul>
 
                 <div class="nav-actions">
-                    <button class="btn btn-ghost theme-toggle" type="button" id="themeToggle"
-                            aria-label="Alternar para tema escuro" aria-pressed="false">
-                        <i class="bi bi-moon-stars" aria-hidden="true"></i>
-                        <span>Tema escuro</span>
-                    </button>
                     @guest
                         <a class="btn btn-ghost" href="{{ route('login') }}">Entrar</a>
                         <a class="btn btn-primary-deblix" href="{{ route('register') }}">Cadastrar</a>
