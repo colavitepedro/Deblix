@@ -1,29 +1,32 @@
 (() => {
-    const toggle = document.getElementById('themeToggle');
     const root = document.documentElement;
+    const choices = Array.from(document.querySelectorAll('[data-theme-choice]'));
 
-    if (!toggle) return;
+    if (choices.length === 0) return;
 
-    const updateTheme = (theme) => {
-        const isDark = theme === 'dark';
+    const applyTheme = (theme) => {
+        if (theme !== 'light' && theme !== 'dark') return;
+
         root.dataset.theme = theme;
         root.dataset.bsTheme = theme;
-        toggle.setAttribute('aria-pressed', String(isDark));
-        toggle.setAttribute('aria-label', `Alternar para tema ${isDark ? 'claro' : 'escuro'}`);
-        toggle.querySelector('i').className = `bi ${isDark ? 'bi-sun' : 'bi-moon-stars'}`;
-        toggle.querySelector('span').textContent = `Tema ${isDark ? 'claro' : 'escuro'}`;
+
+        choices.forEach((choice) => {
+            choice.setAttribute('aria-pressed', String(choice.dataset.themeChoice === theme));
+        });
     };
 
-    updateTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
+    applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
 
-    toggle.addEventListener('click', () => {
-        const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        updateTheme(nextTheme);
+    choices.forEach((choice) => {
+        choice.addEventListener('click', () => {
+            const theme = choice.dataset.themeChoice;
+            applyTheme(theme);
 
-        try {
-            localStorage.setItem('deblix-theme', nextTheme);
-        } catch (error) {
-            // A escolha vale durante esta página se o armazenamento estiver bloqueado.
-        }
+            try {
+                localStorage.setItem('deblix-theme', theme);
+            } catch (error) {
+                // A preferência continua aplicada até a página ser recarregada.
+            }
+        });
     });
 })();
